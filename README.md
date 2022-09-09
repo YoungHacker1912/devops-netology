@@ -25,9 +25,12 @@ else
 fi
 #output будет "It is a file"
 
+ УСПЕШНОЕ ВЫПОЛНЕНИЕ КОМАНДЫ ВОЗВРАЩАЕТ 0 (/TMP - ДИРЕКТОРИЯ), ECHO можно проверить
+ ![cскрипт](https://user-images.githubusercontent.com/93939433/189326505-50880d0d-89c9-45a9-addf-3763212017af.png)
+ 
 12.mkdir /tmp/new_path_directory/bash
 cp /bin/bash /tmp/new_path_directory/bash
-PATH=$PATH:/tmp/new_path_directory/bash
+PATH=/tmp/new_path_directory/bash:$PATH
 
 13.Команда at используется для назначения одноразового задания на заданное время, а команда batch — для назначения одноразовых задач по расписанию
 
