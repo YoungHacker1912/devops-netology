@@ -35,7 +35,7 @@ done
 
 ### Ваш скрипт:
 ```bash
-[Скрипт к заданию 2](https://github.com/YoungHacker1912/devops-netology/blob/main/pictures/Script1.png)
+![Скрипт к заданию 2](https://github.com/YoungHacker1912/devops-netology/blob/main/pictures/Script1.png)
 ```
 
 ## Обязательная задача 3
