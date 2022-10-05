@@ -35,7 +35,16 @@ done
 
 ### Ваш скрипт:
 ```bash
-![Скрипт к заданию 2](https://github.com/YoungHacker1912/devops-netology/blob/main/pictures/Script1.png)
+while (( 1==1 ));
+do
+	curl https://localhost:4757
+	if (( $? != 0 ));
+	then
+		date >> curl.log
+	else
+		break
+	fi
+done
 ```
 
 ## Обязательная задача 3
@@ -43,7 +52,18 @@ done
 
 ### Ваш скрипт:
 ```bash
-???
+IP=("192.168.0.1" "173.194.222.113" "87.250.250.242")
+for i in ${IP[@]};do
+for ((c=0; c<5; c++));do
+	nc -z $i 80
+	if [ $? == 0 ]; then
+	result="$i is reachable by 80 port"
+else
+	result="$i is unreachable by 80 port"
+	fi
+	echo $result >> script2.log
+done
+done
 ```
 
 ## Обязательная задача 4
