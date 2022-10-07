@@ -71,7 +71,15 @@ done
 
 ### Ваш скрипт:
 ```bash
-???
+IP=("192.168.0.1" "173.194.222.113" "87.250.250.242")
+for i in ${IP[@]};do
+	nc -z $i 80
+	if [ $? != 0 ]; then
+	result="$i is unreachable by 80 port"
+	echo $result >> error.log
+	break
+	fi
+done
 ```
 
 ## Дополнительное задание (со звездочкой*) - необязательно к выполнению
