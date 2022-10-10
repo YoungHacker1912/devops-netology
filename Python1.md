@@ -61,13 +61,25 @@ for result in result_os.split('\n'):
 1. Доработать скрипт выше так, чтобы он мог проверять не только локальный репозиторий в текущей директории, а также умел воспринимать путь к репозиторию, который мы передаём как входной параметр. Мы точно знаем, что начальство коварное и будет проверять работу этого скрипта в директориях, которые не являются локальными репозиториями.
 
 ### Ваш скрипт:
-```python
-???
+#!/usr/bin/env python3
+
+import os
+
+path = str(input("Input a path of repository: "))
+bash_command = [f"cd {path}", "git status"]
+result_os = os.popen(f"cd {path} && git status").read()
+is_change = False
+for result in result_os.split('\n'):
+    if result.find('modified') != -1:
+        prepare_result = result.replace('\tmodified:   ', '')
+        diff = os.popen(f"cd {path} " + " && realpath -e " + prepare_result.read()
+        print(diff)
+        continue
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-???
+/home/vagrant/python/devops-netology/Python1.md
 ```
 
 ## Обязательная задача 4
