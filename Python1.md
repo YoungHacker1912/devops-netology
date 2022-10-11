@@ -78,6 +78,8 @@ for result in result_os.split('\n'):
 ```
 
 ### Вывод скрипта при запуске при тестировании:
+
+### Вывод скрипта при запуске при тестировании:
 ```
 /home/vagrant/python/devops-netology/Python1.md
 ```
