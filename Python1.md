@@ -88,7 +88,36 @@ for result in result_os.split('\n'):
 
 ### Ваш скрипт:
 ```python
-???
+import socket
+
+dns_dict = dict()
+dns_list = ['drive.google.com', 'mail.google.com', 'google.com' ]
+
+def ping_dns():
+    with open('ping_results.txt', 'w', encoding='utf-8') as pings:
+        for i_dns in dns_list:
+            response = socket.gethostbyname(i_dns)
+            pings.write(f"{i_dns}: {str(response)}\n")
+
+def write_ip():
+    with open('ping_results.txt', 'r', encoding='utf-8') as pings:
+        for i_line in pings:
+            tmp = i_line.split(': ')
+            if tmp[0] not in dns_dict:
+                dns_dict[tmp[0]] = tmp[1].replace('\n', '')
+
+def check_ips(dns_dct):
+    for i_dns in dns_dct:
+        response = socket.gethostbyname(i_dns)
+        if dns_dict[i_dns] != response:
+            error_1 = f'[ERROR] {i_dns} IP mismatch: {dns_dict[i_dns]} {response}'
+            if error_1 not in errors_list:
+                print(error_1)
+                errors_list.append(error_1)
+ping_dns()
+write_ip()
+while True:
+    check_ips(dns_dict)
 ```
 
 ### Вывод скрипта при запуске при тестировании:
