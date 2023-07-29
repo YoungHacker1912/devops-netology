@@ -24,12 +24,13 @@
 - [Terraform](https://github.com/netology-code/devops-materials/blob/master/README.md),
 - Ansible.
 
-*Приложите вывод команд установленных версий каждой из программ, оформленный в Markdown.*
         $ terraform --version
         Terraform v1.6.0-alpha20230719
         on windows_amd64
 
-        
+        $ vagrant --version
+        Vagrant 2.3.7
+
 
 
 ## Задача 4 
