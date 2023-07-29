@@ -24,14 +24,18 @@
 - [Terraform](https://github.com/netology-code/devops-materials/blob/master/README.md),
 - Ansible.
 
-        $ terraform --version
-        Terraform v1.6.0-alpha20230719
-        on windows_amd64
+        anna@MSI:~$ vboxmanage --version
+        6.1.38_Ubuntur153438
 
-        $ vagrant --version
-        Vagrant 2.3.7
+        anna@MSI:~$ vagrant --version
+        Vagrant 2.2.19
 
+        anna@MSI:~$ ./terraform --version
+        Terraform v1.5.4
+        on linux_amd64
 
+        anna@MSI:~$ ansible --version
+        ansible 2.10.8
 
 ## Задача 4 
 
