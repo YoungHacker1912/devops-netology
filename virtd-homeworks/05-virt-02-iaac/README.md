@@ -43,10 +43,9 @@
 
 - Создайте виртуальную машину.
 
-
+![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/0758c0bc-41a7-4ca5-8e5a-d770bfe1245b)
+![vagrant provision](https://github.com/YoungHacker1912/devops-netology/assets/93939433/2702c7ba-a1de-4c8f-98b1-5d5a7cb281d0)
 
 - Зайдите внутрь ВМ, убедитесь, что Docker установлен с помощью команды
-```
-docker ps,
-```
-Vagrantfile из лекции и код ansible находятся в [папке](https://github.com/netology-code/virt-homeworks/tree/virt-11/05-virt-02-iaac/src).
+
+![docker ps](https://github.com/YoungHacker1912/devops-netology/assets/93939433/f9ce0f4a-8254-4acb-aa8d-21eae34ae4a9)
