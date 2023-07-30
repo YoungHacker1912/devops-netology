@@ -27,21 +27,24 @@
         anna@MSI:~$ vboxmanage --version
         6.1.38_Ubuntur153438
 
-        anna@MSI:~$ vagrant --version
-        Vagrant 2.2.19
+        root@MSI:/mnt/c/VirtualBoxHomeDir# vagrant --version
+        Vagrant 2.3.7
 
         anna@MSI:~$ ./terraform --version
         Terraform v1.5.4
         on linux_amd64
 
-        anna@MSI:~$ ansible --version
-        ansible 2.10.8
+        root@MSI:/mnt/c/VirtualBoxHomeDir# ansible --version
+        ansible [core 2.15.2]
 
 ## Задача 4 
 
 Воспроизведите практическую часть лекции самостоятельно.
 
 - Создайте виртуальную машину.
+
+
+
 - Зайдите внутрь ВМ, убедитесь, что Docker установлен с помощью команды
 ```
 docker ps,
