@@ -11,11 +11,7 @@
 
 **2.1.** Создайте вашу первую виртуальную машину в YandexCloud с помощью web-интерфейса YandexCloud.        
 
-**2.2.*** **(Необязательное задание)**      
-Создайте вашу первую виртуальную машину в YandexCloud с помощью Terraform (вместо использования веб-интерфейса YandexCloud).
-Используйте Terraform-код в директории ([src/terraform](https://github.com/netology-group/virt-homeworks/tree/virt-11/05-virt-04-docker-compose/src/terraform)).
-
-Чтобы получить зачёт, вам нужно предоставить вывод команды terraform apply и страницы свойств, созданной ВМ из личного кабинета YandexCloud.
+![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/f3f99c81-f9d3-4d57-ad7e-fb6f9c40e8da)
 
 ## Задача 3
 
