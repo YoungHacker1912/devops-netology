@@ -11,7 +11,8 @@
 
 **2.1.** Создайте вашу первую виртуальную машину в YandexCloud с помощью web-интерфейса YandexCloud.        
 
-![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/f3f99c81-f9d3-4d57-ad7e-fb6f9c40e8da)
+![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/203f9e00-e917-405e-a03f-2cfe7c7bb3aa)
+
 
 ## Задача 3
 
