@@ -4,7 +4,8 @@
 
 Создайте собственный образ любой операционной системы (например, debian-11) с помощью Packer версии 1.5.0 ([инструкция](https://cloud.yandex.ru/docs/tutorials/infrastructure-management/packer-quickstart)).
 
-Чтобы получить зачёт, вам нужно предоставить скриншот страницы с созданным образом из личного кабинета YandexCloud.
+![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/f476556a-8fdb-423f-80d8-b381bf5ef4fa)
+
 
 ## Задача 2
 
