@@ -11,7 +11,7 @@
 
 **2.1.** Создайте вашу первую виртуальную машину в YandexCloud с помощью web-интерфейса YandexCloud.        
 
-![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/203f9e00-e917-405e-a03f-2cfe7c7bb3aa)
+![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/d95b7f20-c414-46d5-8ddf-4f8d654a8ea3)
 
 
 ## Задача 3
@@ -20,6 +20,9 @@
 Используйте Ansible-код в директории ([src/ansible](https://github.com/netology-group/virt-homeworks/tree/virt-11/05-virt-04-docker-compose/src/ansible)).
 
 Чтобы получить зачёт, вам нужно предоставить вывод команды "docker ps" , все контейнеры, описанные в [docker-compose](https://github.com/netology-group/virt-homeworks/blob/virt-11/05-virt-04-docker-compose/src/ansible/stack/docker-compose.yaml),  должны быть в статусе "Up".
+
+![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/03be8aa2-0e70-45be-9cfc-7a28477cda37)
+
 
 ## Задача 4
 
