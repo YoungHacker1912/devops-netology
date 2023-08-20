@@ -31,12 +31,8 @@
 3. Изучите доступный интерфейс, найдите в интерфейсе автоматически созданные docker-compose-панели с графиками([dashboards](https://grafana.com/docs/grafana/latest/dashboards/use-dashboards/)).
 4. Подождите 5-10 минут, чтобы система мониторинга успела накопить данные.
 
-Чтобы получить зачёт, предоставьте: 
+![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/c4f06405-5a9e-483a-b1c5-4d0fe503fccd)
 
-- скриншот работающего веб-интерфейса Grafana с текущими метриками, как на примере ниже.
-<p align="center">
-  <img width="1200" height="600" src="./assets/yc_02.png">
-</p>
 
 ## Задача 5 (*)
 
