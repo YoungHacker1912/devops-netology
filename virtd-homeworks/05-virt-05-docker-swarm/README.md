@@ -34,6 +34,12 @@ docker node ls
 docker service ls
 ```
 
+![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/660faec1-ef4a-4e1e-8d3e-9d0ee2350564)
+
+
+![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/6ce85f53-7c68-46ab-9f83-400700a3ef6b)
+
+
 ## Задача 4 (*)
 
 Выполните на лидере Docker Swarm-кластера команду, указанную ниже, и дайте письменное описание её функционала — что она делает и зачем нужна:
