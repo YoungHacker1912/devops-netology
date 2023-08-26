@@ -51,5 +51,3 @@ docker swarm update --autolock=true
 
 ![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/85b6dfb2-12af-4529-b8bd-f8d5f4fa1fb0)
 
-
-
