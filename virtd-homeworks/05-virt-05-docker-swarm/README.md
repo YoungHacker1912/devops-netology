@@ -47,5 +47,9 @@ docker service ls
 # см.документацию: https://docs.docker.com/engine/swarm/swarm_manager_locking/
 docker swarm update --autolock=true
 ```
+-Ответ: Docker имеет возможность защитить общий ключ шифрования TLS и ключ, используемый для шифрования и дешифрования журналов Raft, позволяя вам стать владельцем этих ключей и требовать ручной разблокировки менеджеров после перезагрузки. Эта функция называется автоблокировкой.
+
+![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/85b6dfb2-12af-4529-b8bd-f8d5f4fa1fb0)
+
 
 
