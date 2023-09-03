@@ -63,7 +63,23 @@ CREATE ROLE
 postgres=# CREATE DATABASE test_db;
 CREATE DATABASE
 
+postgres=# CREATE TABLE orders (id SERIAL PRIMARY KEY, наименование VARCHAR, цена INTEGER);
+CREATE TABLE
 
+postgres=# CREATE TABLE clients (id SERIAL PRIMARY KEY, фамилия VARCHAR, страна VARCHAR, заказ SERIAL, FOREIGN KEY (заказ) REFERENCES orders (id));
+CREATE TABLE
+
+postgres=# CREATE INDEX country_id ON clients (страна);
+CREATE INDEX
+
+postgres=# GRANT ALL ON orders, clients TO "test-admin-user";
+GRANT
+
+postgres=# CREATE USER "test-simple-user";
+CREATE ROLE
+
+postgres=# GRANT SELECT,INSERT,UPDATE,DELETE ON orders, clients to "test-simple-user";
+GRANT
 ```
 
 Таблица orders:
@@ -78,10 +94,21 @@ CREATE DATABASE
 - заказ (foreign key orders)
 
 Приведите:
-- итоговый список БД после выполнения пунктов выше,
+- итоговый список БД после выполнения пунктов выше
+
+![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/74e22ed9-01e5-4ac8-988a-9993155a8aa1)
+
+  
 - описание таблиц (describe)
+
+![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/2a8190ac-9979-4dd6-a5a5-7fe4b0c5e51e)
+
+  
 - SQL-запрос для выдачи списка пользователей с правами над таблицами test_db
 - список пользователей с правами над таблицами test_db
+
+![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/d061b520-61a2-440d-9198-85b383020f6a)
+
 
 ## Задача 3
 
