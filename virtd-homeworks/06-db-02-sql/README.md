@@ -66,7 +66,7 @@ CREATE DATABASE
 postgres=# CREATE TABLE orders (id SERIAL PRIMARY KEY, наименование VARCHAR, цена INTEGER);
 CREATE TABLE
 
-postgres=# CREATE TABLE clients (id SERIAL PRIMARY KEY, фамилия VARCHAR, страна VARCHAR, заказ SERIAL, FOREIGN KEY (заказ) REFERENCES orders (id));
+postgres=# CREATE TABLE clients (id SERIAL PRIMARY KEY, фамилия VARCHAR, страна VARCHAR, id_заказа SERIAL NOT NULL, FOREIGN KEY (id_заказа) REFERENCES orders (id));
 CREATE TABLE
 
 postgres=# CREATE INDEX country_id ON clients (страна);
@@ -96,19 +96,92 @@ GRANT
 Приведите:
 - итоговый список БД после выполнения пунктов выше
 
-![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/74e22ed9-01e5-4ac8-988a-9993155a8aa1)
+```
+postgres=# \l
+                                 List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges   
+-----------+----------+----------+------------+------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+ test_db   | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+(4 rows)
+```
 
-  
 - описание таблиц (describe)
 
-![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/2a8190ac-9979-4dd6-a5a5-7fe4b0c5e51e)
-
+```
+postgres=# \l+
+                                                                   List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges   |  Size   | Tablespace |    
+            Description                 
+-----------+----------+----------+------------+------------+-----------------------+---------+------------+----
+----------------------------------------
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |                       | 8193 kB | pg_default | def
+ault administrative connection database
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +| 7833 kB | pg_default | unm
+odifiable empty database
+           |          |          |            |            | postgres=CTc/postgres |         |            | 
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +| 7833 kB | pg_default | def
+ault template for new databases
+           |          |          |            |            | postgres=CTc/postgres |         |            | 
+ test_db   | postgres | UTF8     | en_US.utf8 | en_US.utf8 |                       | 7833 kB | pg_default | 
+(4 rows)
+```
   
 - SQL-запрос для выдачи списка пользователей с правами над таблицами test_db
+
+```
+SELECT table_name,grantee,privilege_type 
+FROM information_schema.table_privileges
+WHERE table_schema NOT IN ('information_schema','pg_catalog');
+```
+  
 - список пользователей с правами над таблицами test_db
 
-![image](https://github.com/YoungHacker1912/devops-netology/assets/93939433/d061b520-61a2-440d-9198-85b383020f6a)
-
+```
+table_name |     grantee      | privilege_type 
+------------+------------------+----------------
+ orders     | postgres         | INSERT
+ orders     | postgres         | SELECT
+ orders     | postgres         | UPDATE
+ orders     | postgres         | DELETE
+ orders     | postgres         | TRUNCATE
+ orders     | postgres         | REFERENCES
+ orders     | postgres         | TRIGGER
+ clients    | postgres         | INSERT
+ clients    | postgres         | SELECT
+ clients    | postgres         | UPDATE
+ clients    | postgres         | DELETE
+ clients    | postgres         | TRUNCATE
+ clients    | postgres         | REFERENCES
+ clients    | postgres         | TRIGGER
+ orders     | test-admin-user  | INSERT
+ orders     | test-admin-user  | SELECT
+ orders     | test-admin-user  | UPDATE
+ orders     | test-admin-user  | DELETE
+ orders     | test-admin-user  | TRUNCATE
+ orders     | test-admin-user  | REFERENCES
+ orders     | test-admin-user  | TRIGGER
+ clients    | test-admin-user  | INSERT
+ clients    | test-admin-user  | SELECT
+ clients    | test-admin-user  | UPDATE
+ clients    | test-admin-user  | DELETE
+ clients    | test-admin-user  | TRUNCATE
+ clients    | test-admin-user  | REFERENCES
+ clients    | test-admin-user  | TRIGGER
+ orders     | test-simple-user | INSERT
+ orders     | test-simple-user | SELECT
+ orders     | test-simple-user | UPDATE
+ orders     | test-simple-user | DELETE
+ clients    | test-simple-user | INSERT
+ clients    | test-simple-user | SELECT
+ clients    | test-simple-user | UPDATE
+ clients    | test-simple-user | DELETE
+(36 rows)
+```
 
 ## Задача 3
 
@@ -139,6 +212,27 @@ GRANT
 - приведите в ответе:
     - запросы 
     - результаты их выполнения.
+
+```
+postgres=# INSERT INTO orders (наименование,цена) VALUES
+('Шоколад',10),
+('Принтер',3000),
+('Книга',500),
+('Монитор',7000),
+('Гитара',4000);
+INSERT 0 5
+
+postgres=# ALTER TABLE clients ALTER COLUMN id_заказа DROP NOT NULL;
+ALTER TABLE
+
+postgres=# INSERT INTO clients (фамилия,страна,id_заказа) VALUES
+('Иванов Иван Иванович','USA',NULL),
+('Петров Петр Петрович','Canada',NULL),
+('Иоганн Себастьян Бах','Japan',NULL),
+('Ронни Джеймс Дио','Russia',NULL),
+('Ritchie Blackmore','Russia',NULL);
+INSERT 0 5
+```
 
 ## Задача 4
 
