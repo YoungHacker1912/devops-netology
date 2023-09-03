@@ -56,6 +56,16 @@ networks:
 - создайте пользователя test-simple-user  
 - предоставьте пользователю test-simple-user права на SELECT/INSERT/UPDATE/DELETE данных таблиц БД test_db
 
+```
+postgres=# CREATE USER "test-admin-user";
+CREATE ROLE
+
+postgres=# CREATE DATABASE test_db;
+CREATE DATABASE
+
+
+```
+
 Таблица orders:
 - id (serial primary key)
 - наименование (string)
