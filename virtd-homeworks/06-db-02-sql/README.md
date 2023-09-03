@@ -326,7 +326,8 @@ root@anna-VirtualBox:/home/anna/DevOps/devops-netology/virtd-homeworks/06-db-02-
 ```
 Восстановите БД test_db в новом контейнере.
 
-```
-pg_restore -U postgres -W -h 172.16.0.1 -d test_db /var/lib/postgresql/data/test_db.dump
+```'
+postgres=# CREATE DATABASE test_db WITH ENCODING='UTF-8';
+postgres@postgres2:/$ pg_restore -U postgres -W -h 172.16.0.1 -d test_db /var/lib/postgresql/data/test_db.dump
 ```
 
