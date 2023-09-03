@@ -12,6 +12,41 @@
 
 Приведите получившуюся команду или docker-compose манифест.
 
+```
+version: "3.9"
+
+services:
+  db:
+    image: postgres:12
+    container_name: postgres
+    hostname: postgres
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+    volumes:
+      - $HOME/docker/volumes/postgres/data:/var/lib/postgresql/data
+      - $HOME/docker/volumes/postgres/bckp:/var/lib/postgresql/bckp
+    environment:
+      - POSTGRES_PASSWORD=BlaBla12345
+    networks:
+      - default
+
+  adminer:
+    image: dpage/pgadmin4:7.2
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.0.0/16
+```
+
 ## Задача 2
 
 В БД из задачи 1: 
