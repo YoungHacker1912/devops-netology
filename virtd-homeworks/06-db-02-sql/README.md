@@ -309,13 +309,24 @@ Width - сколько байт в среднем в одной строке в�
 
 Создайте бэкап БД test_db и поместите его в volume, предназначенный для бэкапов (см. Задачу 1).
 
-Остановите контейнер с PostgreSQL (но не удаляйте volumes).
+```
+postgres@postgres:/$ pg_dump -U postgres -W -h 172.16.0.1 test_db > /var/lib/postgresql/data/test_db.dump
+Password:
+```
 
+Остановите контейнер с PostgreSQL (но не удаляйте volumes).
+```
+root@anna-VirtualBox:/home/anna/DevOps/devops-netology/virtd-homeworks/06-db-02-sql# docker stop postgres
+postgres
+```
 Поднимите новый пустой контейнер с PostgreSQL.
 
+```
+root@anna-VirtualBox:/home/anna/DevOps/devops-netology/virtd-homeworks/06-db-02-sql# docker-compose up -d
+```
 Восстановите БД test_db в новом контейнере.
 
-Приведите список операций, который вы применяли для бэкапа данных и восстановления. 
-
----
+```
+pg_restore -U postgres -W -h 172.16.0.1 -d test_db /var/lib/postgresql/data/test_db.dump
+```
 
