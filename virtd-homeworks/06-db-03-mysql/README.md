@@ -145,25 +145,102 @@ mysql> SELECT COUNT(*) FROM test_db.orders WHERE price > 300;
     - Имя "James"
 
 ```
-mysql> CREATE USER 'test'@'127.0.0.1' IDENTIFIED BY 'test-pass';
-
+CREATE USER 'test'@'localhost'
+IDENTIFIED WITH mysql_native_password BY 'test-pass'
+WITH MAX_CONNECTIONS_PER_HOUR 100
+PASSWORD EXPIRE INTERVAL 180 DAY
+FAILED_LOGIN_ATTEMPTS 3
+ATTRIBUTE '{"first_name":"James", "last_name":"Pretty"}';
 ```
 
 Предоставьте привелегии пользователю `test` на операции SELECT базы `test_db`.
+
+```
+GRANT SELECT ON `test_db`.* TO 'test'@'localhost';
+FLUSH PRIVILEGES;
+```
     
 Используя таблицу INFORMATION_SCHEMA.USER_ATTRIBUTES получите данные по пользователю `test` и 
 **приведите в ответе к задаче**.
+
+```
+mysql> SELECT * FROM INFORMATION_SCHEMA.USER_ATTRIBUTES WHERE USER = 'test';
++------+-----------+------------------------------------------------+
+| USER | HOST      | ATTRIBUTE                                      |
++------+-----------+------------------------------------------------+
+| test | localhost | {"last_name": "Pretty", "first_name": "James"} |
++------+-----------+------------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ## Задача 3
 
 Установите профилирование `SET profiling = 1`.
 Изучите вывод профилирования команд `SHOW PROFILES;`.
 
+```
+mysql> set profiling=1;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> select count(*) from orders;
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> SHOW PROFILES;
++----------+------------+------------------------------------------------------------------------------------------------------+
+| Query_ID | Duration   | Query                                                                                                |
++----------+------------+------------------------------------------------------------------------------------------------------+
+|        1 | 0.00636475 | SELECT table_schema,table_name,engine FROM information_schema.tables WHERE table_schema = DATABASE() |
+|        2 | 0.00051150 | select count(*) from orders                                                                   
+                                                                      |
++----------+------------+------------------------------------------------------------------------------------------------------+
+
+10 rows in set, 1 warning (0.00 sec)
+```
+Все выполненные запросы за сессию с временем выполнения.
+
 Исследуйте, какой `engine` используется в таблице БД `test_db` и **приведите в ответе**.
+
+```
+mysql> SELECT table_schema,table_name,engine FROM information_schema.tables WHERE table_schema = DATABASE();
++--------------+------------+--------+
+| TABLE_SCHEMA | TABLE_NAME | ENGINE |
++--------------+------------+--------+
+| test_db      | orders     | InnoDB |
++--------------+------------+--------+
+1 row in set (0.01 sec)
+```
 
 Измените `engine` и **приведите время выполнения и запрос на изменения из профайлера в ответе**:
 - на `MyISAM`
 - на `InnoDB`
+
+```
+mysql> SET profiling = 1;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> ALTER TABLE orders ENGINE = MyISAM;
+Query OK, 5 rows affected (0.07 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE orders ENGINE = InnoDB;
+Query OK, 5 rows affected (0.12 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SHOW PROFILES;
++---------+------------+------------------------------------------------------------------------------------------------------+
+| Query_ID | Duration   | Query                                                                                                |
++----------+------------+------------------------------------------------------------------------------------------------------+                                                                                |
+|       1 | 0.07411425 | ALTER TABLE orders ENGINE = MyISAM                                                                   |
+|       2 | 0.11438225 | ALTER TABLE orders ENGINE = InnoDB                                                                   |
++----------+------------+------------------------------------------------------------------------------------------------------+
+
+14 rows in set, 1 warning (0.00 sec)
+```
 
 ## Задача 4 
 
@@ -178,10 +255,3 @@ mysql> CREATE USER 'test'@'127.0.0.1' IDENTIFIED BY 'test-pass';
 
 Приведите в ответе измененный файл `my.cnf`.
 
----
-
-### Как оформить ДЗ?
-
-Выполненное домашнее задание пришлите ссылкой на .md-файл в вашем репозитории.
-
----
