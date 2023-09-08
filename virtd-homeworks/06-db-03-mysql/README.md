@@ -122,7 +122,16 @@ mysql> SHOW TABLES FROM test_db;
 
 **Приведите в ответе** количество записей с `price` > 300.
 
-В следующих заданиях мы будем продолжать работу с данным контейнером.
+```
+mysql> SELECT COUNT(*) FROM test_db.orders WHERE price > 300;
++----------+
+| COUNT(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+```
+Ответ: 1
 
 ## Задача 2
 
@@ -134,6 +143,11 @@ mysql> SHOW TABLES FROM test_db;
 - аттрибуты пользователя:
     - Фамилия "Pretty"
     - Имя "James"
+
+```
+mysql> CREATE USER 'test'@'127.0.0.1' IDENTIFIED BY 'test-pass';
+
+```
 
 Предоставьте привелегии пользователю `test` на операции SELECT базы `test_db`.
     
