@@ -59,6 +59,7 @@ postredb=# CREATE DATABASE test_database;
 Восстановите бэкап БД в `test_database`.
 
 ```
+psql -U postgreuser test_database < /var/lib/postgresql/data/test_dump.sql
 
 ```
 
@@ -66,10 +67,22 @@ postredb=# CREATE DATABASE test_database;
 
 Подключитесь к восстановленной БД и проведите операцию ANALYZE для сбора статистики по таблице.
 
-Используя таблицу [pg_stats](https://postgrespro.ru/docs/postgresql/12/view-pg-stats), найдите столбец таблицы `orders` 
-с наибольшим средним значением размера элементов в байтах.
+```
+test_database=# ANALYZE VERBOSE public.orders;
+INFO:  analyzing "public.orders"
+INFO:  "orders": scanned 1 of 1 pages, containing 8 live rows and 0 dead rows; 8 rows in sample, 8 estimated total rows
+ANALYZE
+```
 
-**Приведите в ответе** команду, которую вы использовали для вычисления и полученный результат.
+Используя таблицу [pg_stats](https://postgrespro.ru/docs/postgresql/12/view-pg-stats), найдите столбец таблицы `orders` с наибольшим средним значением размера элементов в байтах.
+
+```
+test_database=# SELECT tablename, attname, avg_width FROM pg_stats WHERE tablename='orders' ORDER BY avg_width DESC LIMIT 1;
+ tablename | attname | avg_width 
+-----------+---------+-----------
+ orders    | title   |        16
+(1 row)
+```
 
 ## Задача 3
 
@@ -79,18 +92,44 @@ postredb=# CREATE DATABASE test_database;
 
 Предложите SQL-транзакцию для проведения данной операции.
 
+```
+CREATE TABLE orders1 (CHECK (price < 499)) INHERITS (orders);
+CREATE TABLE orders2 (CHECK (price > 499)) INHERITS (orders);
+
+INSERT INTO orders1 SELECT * FROM orders WHERE price < 499;
+DELETE FROM only orders WHERE price < 499;
+
+INSERT INTO orders2 SELECT * FROM orders WHERE price >= 499;
+DELETE FROM only orders WHERE price >= 499;
+```
+
 Можно ли было изначально исключить "ручное" разбиение при проектировании таблицы orders?
+Можно было бы сделать разделение 
+
+```
+CREATE TABLE public.orders (
+id integer NOT NULL,
+title character varying(80) NOT NULL,
+price integer DEFAULT 0
+)
+PARTITION BY RANGE (price);
+
+CREATE TABLE orders_1 PARTITION OF orders_new FOR VALUES FROM ('0') TO ('499');
+CREATE TABLE orders_2 PARTITION OF orders_new FOR VALUES FROM ('499') TO ('10000000');
+```
 
 ## Задача 4
 
 Используя утилиту `pg_dump` создайте бекап БД `test_database`.
 
+```
+root@ca44c06b8576:/# pg_dump -U postgreuser test_database > /var/lib/postgresql/data/test_database.dump
+```
+
 Как бы вы доработали бэкап-файл, чтобы добавить уникальность значения столбца `title` для таблиц `test_database`?
 
----
+Добавить UNIQUE
+```
+title character varying(80) UNIQUE NOT NULL;
+```
 
-### Как cдавать задание
-
-Выполненное домашнее задание пришлите ссылкой на .md-файл в вашем репозитории.
-
----
