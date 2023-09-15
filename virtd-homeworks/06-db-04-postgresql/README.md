@@ -16,12 +16,9 @@ services:
       POSTGRES_PASSWORD: "postgrepass"
       PGDATA: "/var/lib/postgresql/data/pgdata"
     volumes:
-      - postgredb-data:/var/lib/postgresql/data
+      - ./postgredb-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-
-volumes:
-  postgredb-data:
 ```
 
 Подключитесь к БД PostgreSQL используя `psql`.
